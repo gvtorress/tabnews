@@ -6,12 +6,19 @@ jobs:
   jest:
     name: Jest Ubuntu
     runs-on: ubuntu-latest
+    env:
+      POSTGRES_HOST:localhost
+      POSTGRES_PORT:5432
+      POSTGRES_USER:local_user
+      POSTGRES_DB:local_db
+      POSTGRES_PASSWORD:pg_password
+      DATABASE_URL:"postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version:  "lts/hydrogen"
+          node-version: "24.13.1"
 
       - run: npm ci
 
