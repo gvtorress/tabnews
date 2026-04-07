@@ -1,0 +1,29 @@
+name: Automated Tests
+
+on: pull_request
+
+jobs:
+  jest:
+    name: Jest Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "24.13.1"
+
+      - name: Create .env.development
+        run: |
+          cat <<EOF > .env.development
+          POSTGRES_HOST=localhost
+          POSTGRES_PORT=5432
+          POSTGRES_USER=local_user
+          POSTGRES_DB=local_db
+          POSTGRES_PASSWORD=pg_password
+          DATABASE_URL=postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB
+          EOF
+
+      - run: npm ci
+
+      - run: npm test
