@@ -1,5 +1,5 @@
-import database from 'infra/database';
-import orchestrator from 'tests/orchestrator';
+import database from "infra/database";
+import orchestrator from "tests/orchestrator";
 
 beforeAll(async () => {
   await orchestrator.waitForAllServices();
@@ -7,7 +7,6 @@ beforeAll(async () => {
 });
 
 test("GET to /api/v1/migrations should return 200", async () => {
-
   const response = await fetch("http://localhost:3000/api/v1/migrations");
   expect(response.status).toBe(200);
 

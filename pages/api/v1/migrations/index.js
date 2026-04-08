@@ -1,9 +1,9 @@
-import runner from 'node-pg-migrate';
-import { join } from 'node:path';
-import database from 'infra/database';
+import runner from "node-pg-migrate";
+import { join } from "node:path";
+import database from "infra/database";
 
 export default async function migrations(request, response) {
-  const allowedMethods = ['GET', 'POST'];
+  const allowedMethods = ["GET", "POST"];
   if (!allowedMethods.includes(request.method)) {
     return response.status(405).json({
       error: `Method "${request.method}" not allowed`,
@@ -21,14 +21,14 @@ export default async function migrations(request, response) {
       direction: "up",
       verbose: true,
       migrationsTable: "pgmigrations",
-    }
+    };
 
-    if (request.method === 'GET') {
+    if (request.method === "GET") {
       const pendingMigrations = await runner(defaultMigrationOptions);
       return response.status(200).json(pendingMigrations);
     }
 
-    if (request.method === 'POST') {
+    if (request.method === "POST") {
       const migratedMigrations = await runner({
         ...defaultMigrationOptions,
         dryRun: false,
