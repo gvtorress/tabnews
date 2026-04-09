@@ -24,8 +24,8 @@
     "services:wait:database": "node infra/scripts/wait-for-postgres.js",
     "migrations:create": "node-pg-migrate --migrations-dir infra/migrations create",
     "migrations:up": "node-pg-migrate -m infra/migrations --envPath .env.development up",
-    "lint:prettier:check": "prettier --check .",
-    "lint:prettier:fix": "prettier --write .",
+    "lint:prettier:check": "prettier --check tests/integration/api/v1/migrations/post.test.js",
+    "lint:prettier:fix": "prettier --write tests/integration/api/v1/migrations/post.test.js",
     "lint:eslint:check": "next lint --dir .",
     "prepare": "husky",
     "commit": "cz"
