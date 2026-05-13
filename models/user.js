@@ -1,4 +1,4 @@
-import database from "infra/database"
+import database from "infra/database";
 import { ValidationError, NotFoundError } from "infra/erros";
 
 async function findOneByUsername(username) {
@@ -34,7 +34,7 @@ async function findOneByUsername(username) {
 async function create(userInputValues) {
   await validateUniqueEmail(userInputValues.email);
   await validateUniqueUsername(userInputValues.username);
-  
+
   const newUser = await runInsertQuery(userInputValues);
   return newUser;
 
@@ -93,7 +93,7 @@ async function create(userInputValues) {
       values: [
         userInputValues.username,
         userInputValues.email,
-        userInputValues.password
+        userInputValues.password,
       ],
     });
     return results.rows[0];
@@ -103,6 +103,6 @@ async function create(userInputValues) {
 const user = {
   create,
   findOneByUsername,
-}
+};
 
 export default user;

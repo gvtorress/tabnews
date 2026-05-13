@@ -22,7 +22,7 @@ exports.up = (pgm) => {
       type: "varchar(60)",
       notNull: true,
     },
-    
+
     created_at: {
       type: "timestamptz",
       notNull: true,
@@ -33,8 +33,8 @@ exports.up = (pgm) => {
       type: "timestamptz",
       notNull: true,
       default: pgm.func("timezone('utc', now())"),
-    }
-  })
+    },
+  });
 };
 
 exports.down = false;
