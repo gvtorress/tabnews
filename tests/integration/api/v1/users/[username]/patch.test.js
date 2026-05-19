@@ -34,7 +34,7 @@ describe("PATCH /api/v1/users/[username]", () => {
       await orchestrator.createUser({
         username: "user1",
       });
-          
+
       await orchestrator.createUser({
         username: "user2",
       });
