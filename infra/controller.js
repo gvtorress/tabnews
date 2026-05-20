@@ -2,6 +2,7 @@ import {
   InternalServerError,
   MethodNotAllowedError,
   NotFoundError,
+  UnauthorizedError,
   ValidationError,
 } from "./erros";
 
@@ -11,12 +12,15 @@ export function onNoMatchHandler(request, response) {
 }
 
 export function onErrorHandler(err, request, response) {
-  if (err instanceof ValidationError || err instanceof NotFoundError) {
+  if (
+    err instanceof ValidationError ||
+    err instanceof NotFoundError ||
+    err instanceof UnauthorizedError
+  ) {
     return response.status(err.statusCode).json(err);
   }
 
   const publicErrorObject = new InternalServerError({
-    statusCode: err.statusCode,
     cause: err,
   });
 
